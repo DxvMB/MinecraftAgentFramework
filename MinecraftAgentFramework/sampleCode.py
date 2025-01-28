@@ -1,7 +1,7 @@
 # Import necessary modules
 import mcpi.minecraft as Minecraft
 import mcpi.block as block
-from MInecraftAgentFramework.mcpi import minecraft
+from MinecraftAgentFramework.mcpi import minecraft
 
 # Connect to the Minecraft game
 mc = minecraft.Minecraft.create()
