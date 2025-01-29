@@ -1,1 +1,1 @@
-# MInecraftAgentFramework
+# MinecraftAgentFramework
