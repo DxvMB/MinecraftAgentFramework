@@ -1,5 +1,5 @@
 # agents/insult_bot.py
-from ..agents.base_agent import MinecraftAgent
+from MinecraftAgentFramework.agents.base_agent import MinecraftAgent
 import random
 import time
 

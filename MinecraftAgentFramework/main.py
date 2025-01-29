@@ -1,6 +1,6 @@
-from agents.insult_bot import InsultBot
-from agents.tnt_bot import TNTBot
-from agents.oracle_bot import OracleBot
+from MinecraftAgentFramework.agents.insult_bot import InsultBot
+from MinecraftAgentFramework.agents.tnt_bot import TNTBot
+from MinecraftAgentFramework.agents.oracle_bot import OracleBot
 from framework.agent_framework import AgentFramework
 import time
 
@@ -15,3 +15,4 @@ if __name__ == "__main__":
             time.sleep(1)
     except KeyboardInterrupt:
         print("Simulation ended.")
+
