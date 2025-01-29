@@ -1,11 +1,17 @@
-# Import necessary modules
-import mcpi.minecraft as Minecraft
-import mcpi.block as block
-from MinecraftAgentFramework.mcpi import minecraft
+from agents.insult_bot import InsultBot
+from agents.tnt_bot import TNTBot
+from agents.oracle_bot import OracleBot
+from framework.agent_framework import AgentFramework
+import time
 
-# Connect to the Minecraft game
-mc = minecraft.Minecraft.create()
-# Interact with the Minecraft world
-mc.postToChat("Hello Minecraft World")
-pos = mc.player.getTilePos()
-mc.setBlock(pos.x+3, pos.y, pos.z, block.STONE.id)
+if __name__ == "__main__":
+    framework = AgentFramework()
+    framework.register_agent(InsultBot("InsultBot"))
+    framework.register_agent(TNTBot("TNTBot"))
+    framework.register_agent(OracleBot("OracleBot"))
+    threads = framework.start_all()
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        print("Simulation ended.")
