@@ -3,7 +3,7 @@ from unittest.mock import patch, MagicMock
 from MinecraftAgentFramework.agents.InsultBot import InsultBot  # Ensure this import is defined properly
 
 
-class TestInsultBotCreationAndBehavior(unittest.TestCase):
+class test_insult_bot(unittest.TestCase):
 
     def setUp(self):
         """
