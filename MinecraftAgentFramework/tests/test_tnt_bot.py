@@ -3,7 +3,7 @@ from unittest.mock import patch, MagicMock
 from MinecraftAgentFramework.agents.TNTBot import TNTBot  # Adjust the import as needed
 
 
-class test_tnt_bot(unittest.TestCase):
+class TestTNTBot(unittest.TestCase):
 
     def setUp(self):
         """
