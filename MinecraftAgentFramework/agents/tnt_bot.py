@@ -6,7 +6,7 @@ import time
 
 class TNTBot(MinecraftAgent):
     def run(self):
-        while True:
+        while self.running:
             x = random.randint(1, 5)
             z = random.randint(1, 5)
             self.build(block.TNT.id, x, 0, z)

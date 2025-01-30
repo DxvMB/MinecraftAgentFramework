@@ -10,6 +10,7 @@ mc_lock = threading.Lock()
 class MinecraftAgent:
     def __init__(self, name):
         self.name = name
+        self.running = True
         with mc_lock:
             self.position = mc.player.getTilePos()
 
@@ -24,8 +25,6 @@ class MinecraftAgent:
 
     def send_message(self, message):
         mc.postToChat(f"{self.name}: {message}")
-
-
 
     def invoke_method(self, method_name, *args, **kwargs):
         if hasattr(self, method_name):
@@ -49,3 +48,6 @@ class MinecraftAgent:
     def get_current_position():
         with mc_lock:
             return mc.player.getTilePos()
+
+    def set_run(self):
+        self.running = False

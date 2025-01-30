@@ -7,7 +7,7 @@ from ..mcpi import block
 
 class OracleBot(MinecraftAgent):
     def run(self):
-        while True:
+        while self.running:
             chat_message = self.read_and_respond()
             if str(chat_message).lower() == "hola":
                 self.send_message("Hola! En que puedo ayudarte en el mundo de Minecraft?")
