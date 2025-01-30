@@ -3,7 +3,7 @@ from unittest.mock import MagicMock, patch
 from MinecraftAgentFramework.framework.AgentManager import BotManager
 
 
-class TestBotManager(unittest.TestCase):
+class test_agent_manager(unittest.TestCase):
     @patch("MinecraftAgentFramework.framework.AgentManager.Minecraft.create")  # Mock Minecraft connection
     def setUp(self, mock_minecraft):
         self.mock_minecraft = mock_minecraft.return_value
