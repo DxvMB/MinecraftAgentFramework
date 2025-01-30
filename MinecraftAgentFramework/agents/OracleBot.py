@@ -1,7 +1,7 @@
-# agents/oracle_bot.py
+# agents/OracleBot.py
 import time
 
-from MinecraftAgentFramework.agents.base_agent import MinecraftAgent
+from MinecraftAgentFramework.agents.BaseAgent import MinecraftAgent
 from ..mcpi import block
 
 
@@ -23,7 +23,4 @@ class OracleBot(MinecraftAgent):
             elif str(chat_message).lower() == "mueve":
                 self.move(1, 0, 0)  # Mueve al agente 1 bloque hacia adelante.
                 self.send_message("Me he movido un bloque hacia adelante")
-                time.sleep(3)
-            else:
-                self.send_message("No entiendo el mensaje. Intenta algo como 'hola', 'posicion', 'construye' o 'mueve'!")
                 time.sleep(3)

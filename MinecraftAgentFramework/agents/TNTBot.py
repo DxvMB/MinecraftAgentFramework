@@ -1,5 +1,5 @@
-# agents/tnt_bot.py
-from MinecraftAgentFramework.agents.base_agent import MinecraftAgent
+# agents/TNTBot.py
+from MinecraftAgentFramework.agents.BaseAgent import MinecraftAgent
 from ..mcpi import block
 import random
 import time

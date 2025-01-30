@@ -1,9 +1,9 @@
 import threading
 import time
 
-from MinecraftAgentFramework.agents.insult_bot import InsultBot
-from MinecraftAgentFramework.agents.oracle_bot import OracleBot
-from MinecraftAgentFramework.agents.tnt_bot import TNTBot
+from MinecraftAgentFramework.agents.InsultBot import InsultBot
+from MinecraftAgentFramework.agents.OracleBot import OracleBot
+from MinecraftAgentFramework.agents.TNTBot import TNTBot
 from MinecraftAgentFramework.mcpi.minecraft import Minecraft
 
 mc = Minecraft.create()

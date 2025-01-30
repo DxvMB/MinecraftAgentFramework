@@ -1,4 +1,4 @@
-# agents/base_agent.py
+# agents/BaseAgent.py
 from ..mcpi.minecraft import Minecraft
 import threading
 
