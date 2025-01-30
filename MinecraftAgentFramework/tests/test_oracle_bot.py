@@ -3,7 +3,7 @@ from unittest.mock import patch, MagicMock
 from MinecraftAgentFramework.agents.OracleBot import OracleBot  # Adjust the import as needed
 
 
-class test_oracle_bot(unittest.TestCase):
+class TestOracleBot(unittest.TestCase):
 
     def setUp(self):
         """
