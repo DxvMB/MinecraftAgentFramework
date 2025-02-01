@@ -1,10 +1,10 @@
 import threading
 from http.client import responses
 
-from MinecraftAgentFramework.agents.InsultBot import InsultBot
-from MinecraftAgentFramework.agents.TNTBot import TNTBot
-from MinecraftAgentFramework.agents.OracleBot import OracleBot
-from MinecraftAgentFramework.framework.AgentManager import BotManager
+from MinecraftAgentFramework.agents.insult_bot import InsultBot
+from MinecraftAgentFramework.agents.tnt_bot import TNTBot
+from MinecraftAgentFramework.agents.oracle_bot import OracleBot
+from MinecraftAgentFramework.framework.agent_manager import BotManager
 import time
 
 
