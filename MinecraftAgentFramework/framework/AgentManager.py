@@ -17,7 +17,7 @@ class BotManager:
         Inicia todos los bots disponibles (insult_bot, oracle_bot, tnt_bot).
         Si ya están en ejecución, los omite.
         """
-        bot_types = ["insult_bot", "oracle_bot", "tnt_bot"]
+        bot_types = ["insult_bot", "oracle_bot", "tnt_bot", "chat_bot"]
 
         for bot_type in bot_types:
             self.start_bot(bot_type)
@@ -29,6 +29,8 @@ class BotManager:
             bot = OracleBot("Oracle Bot")
         elif bot_type == "tnt_bot":
             bot = TNTBot("TNT Bot")
+        elif bot_type == "chat_bot":
+            bot = ChatBotAgent("facebook/opt-350m")
         else:
             print(f"Tipo de bot desconocido: {bot_type}")
             return
