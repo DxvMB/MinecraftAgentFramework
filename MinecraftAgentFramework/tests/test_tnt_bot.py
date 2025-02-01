@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from MinecraftAgentFramework.agents.tnt_bot import TNTBot
+from ..agents.tnt_bot import TNTBot
 
 class TestTNTBot(unittest.TestCase):
 
