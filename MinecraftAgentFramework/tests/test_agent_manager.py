@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import MagicMock, patch
-from MinecraftAgentFramework.framework.AgentManager import BotManager
+from MinecraftAgentFramework.framework.agent_manager import BotManager
 
 
 class TestAgentManager(unittest.TestCase):
