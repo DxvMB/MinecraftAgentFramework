@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import MagicMock, patch
-from ..framework.agent_manager import BotManager
+from framework.agent_manager import BotManager
 
 
 class TestAgentManager(unittest.TestCase):
