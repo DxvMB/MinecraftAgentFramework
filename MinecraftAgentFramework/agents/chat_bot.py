@@ -1,7 +1,6 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from MinecraftAgentFramework.mcpi.minecraft import Minecraft
 import time
-import threading
 import torch
 
 

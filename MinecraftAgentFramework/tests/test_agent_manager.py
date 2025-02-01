@@ -1,17 +1,17 @@
 import unittest
 from unittest.mock import MagicMock, patch
-from framework.agent_manager import BotManager
+from MinecraftAgentFramework.framework.agent_manager import BotManager
 
 
 class TestAgentManager(unittest.TestCase):
-    @patch("MinecraftAgentFramework.framework.AgentManager.Minecraft.create")  # Mock Minecraft connection
+    @patch("MinecraftAgentFramework.framework.agent_manager.Minecraft.create")  # Mock Minecraft connection
     def setUp(self, mock_minecraft):
         self.mock_minecraft = mock_minecraft.return_value
         self.bot_manager = BotManager()
 
-    @patch("MinecraftAgentFramework.framework.AgentManager.InsultBot")
-    @patch("MinecraftAgentFramework.framework.AgentManager.OracleBot")
-    @patch("MinecraftAgentFramework.framework.AgentManager.TNTBot")
+    @patch("MinecraftAgentFramework.framework.agent_manager.InsultBot")
+    @patch("MinecraftAgentFramework.framework.agent_manager.OracleBot")
+    @patch("MinecraftAgentFramework.framework.agent_manager.TNTBot")
     @patch("threading.Thread")
     def test_start_bot(self, mock_thread, mock_tnt_bot, mock_oracle_bot, mock_insult_bot):
         # Test starting specific bots
@@ -34,8 +34,8 @@ class TestAgentManager(unittest.TestCase):
             self.bot_manager.start_bot("unknown_bot")
             mocked_print.assert_called_with("Tipo de bot desconocido: unknown_bot")
 
-    @patch("MinecraftAgentFramework.framework.AgentManager.threading.Thread")
-    @patch("MinecraftAgentFramework.framework.AgentManager.TNTBot")
+    @patch("MinecraftAgentFramework.framework.agent_manager.threading.Thread")
+    @patch("MinecraftAgentFramework.framework.agent_manager.TNTBot")
     def test_stop_bot(self, mock_tnt_bot, mock_thread):
         # Add a mock bot to threads
         mock_bot_instance = MagicMock()
@@ -61,7 +61,7 @@ class TestAgentManager(unittest.TestCase):
             mocked_print.assert_any_call("- bot1")
             mocked_print.assert_any_call("- bot2")
 
-    @patch("MinecraftAgentFramework.framework.AgentManager.BotManager.read")
+    @patch("MinecraftAgentFramework.framework.agent_manager.BotManager.read")
     @patch("time.sleep", return_value=None)  # To avoid delays during test
     def test_read_and_response(self, mock_sleep, mock_read):
         # Simulate a start command
@@ -78,7 +78,7 @@ class TestAgentManager(unittest.TestCase):
             mock_list.assert_called_once()
             mocked_print.assert_any_call("Saliendo del programa...")
 
-    @patch("MinecraftAgentFramework.framework.AgentManager.mc.events.pollChatPosts")
+    @patch("MinecraftAgentFramework.framework.agent_manager.mc.events.pollChatPosts")
     def test_read(self, mock_pollChatPosts):
         # Simulate no chat messages
         mock_pollChatPosts.return_value = []
@@ -97,7 +97,7 @@ class TestAgentManager(unittest.TestCase):
         mock_start.assert_any_call("insult_bot")
         mock_start.assert_any_call("oracle_bot")
         mock_start.assert_any_call("tnt_bot")
-        self.assertEqual(mock_start.call_count, 3)
+        self.assertEqual(mock_start.call_count, 4)
 
 
 if __name__ == "__main__":
