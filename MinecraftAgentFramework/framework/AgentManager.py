@@ -4,6 +4,7 @@ import time
 from MinecraftAgentFramework.agents.InsultBot import InsultBot
 from MinecraftAgentFramework.agents.OracleBot import OracleBot
 from MinecraftAgentFramework.agents.TNTBot import TNTBot
+from MinecraftAgentFramework.agents.chat_bot import ChatBotAgent
 from MinecraftAgentFramework.mcpi.minecraft import Minecraft
 
 mc = Minecraft.create()
