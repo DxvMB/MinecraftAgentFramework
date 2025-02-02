@@ -24,7 +24,7 @@ class TestChatBotAgent(unittest.TestCase):
         mock_query_llm.assert_called_with("Hello")
 
     def test_read_minecraft_chat(self):
-        self.bot.mc.events.pollChatPosts.return_value = [MagicMock(message="Hello, bot!", entityId=1)]
+        self.bot.mc.events.pollChatPosts.return_value = [MagicMock(message="chatbot Hello, bot!", entityId=1)]
         message, sender = self.bot.read_minecraft_chat()
         self.assertEqual(message, "Hello, bot!")
         self.assertEqual(sender, 1)

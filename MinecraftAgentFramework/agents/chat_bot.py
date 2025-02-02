@@ -1,4 +1,6 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM
+
+from MinecraftAgentFramework.agents.minecraft_agent import MinecraftAgent
 from MinecraftAgentFramework.mcpi.minecraft import Minecraft
 import time
 import torch
@@ -65,7 +67,7 @@ class ChatBotAgent:
             print(f"Error querying the model: {e}")
             return "Sorry, I couldn't process your message."
 
-    def read_minecraft_chat(self):
+    def read_minecraft_chat(self, chat_events=None):
         """
         Poll Minecraft chat messages. Returns the latest message if available, else None.
 
@@ -74,12 +76,20 @@ class ChatBotAgent:
             message is the text of the chat message.
         """
         chat_events = list(self.mc.events.pollChatPosts())
+
         if not chat_events:
             return None, None
-
-        message = chat_events[-1].message  # Most recent message
-        sender = chat_events[-1].entityId
-        return message, sender
+        else:
+            event = chat_events[0]
+            mess = event.message
+            lists = mess.split(' ')
+            if lists[0] == "chatbot":
+                rest_list = ' '.join(lists[1:])
+                message = rest_list  # Most recent message
+                sender = chat_events[-1].entityId
+                return message, sender
+            else:
+                return None, None
 
     def send_minecraft_message(self, message):
         """

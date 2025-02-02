@@ -1,6 +1,6 @@
 import threading
 import time
-
+from MinecraftAgentFramework.agents.minecraft_agent import MinecraftAgent
 from MinecraftAgentFramework.agents.insult_bot import InsultBot
 from MinecraftAgentFramework.agents.oracle_bot import OracleBot
 from MinecraftAgentFramework.agents.tnt_bot import TNTBot
@@ -72,6 +72,7 @@ class BotManager:
         print("Bots activos:")
         for bot_type in self.threads.keys():
             print(f"- {bot_type}")
+
     @staticmethod
     def read():
         chat_posts = BotManager.mc.events.pollChatPosts()
