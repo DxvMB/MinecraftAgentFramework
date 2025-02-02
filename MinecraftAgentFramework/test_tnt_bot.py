@@ -1,5 +1,3 @@
-import sys
-sys.path.append('./MinecraftAgentFramework/MinecraftAgentFramework/')  # Adjust 'path/to/project' to the appropriate directory
 import unittest
 from unittest.mock import patch, MagicMock
 from agents.tnt_bot import TNTBot

@@ -8,6 +8,9 @@ jobs:
     name: Run tests and collect coverage
     runs-on: ubuntu-latest
     steps:
+      - name: Set PYTHONPATH
+        run: echo "PYTHONPATH=$PYTHONPATH:./MinecraftAgentFramework" >> $GITHUB_ENV
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
