@@ -17,10 +17,10 @@ class OracleBot(MinecraftAgent):
                 self.send_message(f"Actualmente estoy en las coordenadas: x={pos.x}, y={pos.y}, z={pos.z}.")
                 time.sleep(3)
             elif str(chat_message).lower() == "construye":
-                self.build(block.WOOD.id, 1, 0, 0)  # Construye un bloque de madera a un lado.
+                self.build(block.WOOD.id, 1, 0, 0)  # build a block next to you
                 self.send_message("Me he construido un bloque de madera")
                 time.sleep(3)
             elif str(chat_message).lower() == "mueve":
-                self.move(1, 0, 0)  # Mueve al agente 1 bloque hacia adelante.
+                self.move(1, 0, 0)  # Move one block forward.
                 self.send_message("Me he movido un bloque hacia adelante")
                 time.sleep(3)
