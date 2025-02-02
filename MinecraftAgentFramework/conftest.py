@@ -1,2 +1,2 @@
-import sys;
+import sys
 sys.modules.pop("test", None)
