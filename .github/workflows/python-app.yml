@@ -8,38 +8,30 @@ jobs:
     name: Run tests and collect coverage
     runs-on: ubuntu-latest
     steps:
-      # Set PYTHONPATH environment variable
       - name: Set PYTHONPATH
         run: echo "PYTHONPATH=$PYTHONPATH:./MinecraftAgentFramework" >> $GITHUB_ENV
 
-      # Checkout the repository
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Fetch all history for all branches and tags
+          fetch-depth: 0
 
-      # Set up Python
       - name: Set up Python
         uses: actions/setup-python@v4
-        with:
-          python-version: '3.12'  # Specify the Python version (e.g., '3.9')
 
-      # Install dependencies in a single step
       - name: Install dependencies
-        run: |
-          pip install pytest pytest-cov
-          pip install transformers
-          pip install torch
+        run: pip install pytest pytest-cov
 
-      # Run tests with coverage
+      - name: Install dependencies
+        run: pip install transformers
+
+      - name: Install dependencies
+        run: pip install torch
+
       - name: Run tests
         run: pytest --cov-branch --cov-report=xml
 
-      # Upload coverage results to Codecov
       - name: Upload results to Codecov
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./coverage.xml  # Explicitly specify the coverage file
-          flags: unittests      # Optional: Add a flag for this job
-          fail_ci_if_error: true  # Fail the CI if the upload fails
