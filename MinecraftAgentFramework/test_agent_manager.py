@@ -1,14 +1,13 @@
 import unittest
-import sys
-sys.path.append("")
 from unittest.mock import MagicMock, patch
 from framework.agent_manager import BotManager
 
 
 class TestAgentManager(unittest.TestCase):
-    @patch("framework.agent_manager.Minecraft.create")  # Mock Minecraft connection
+    @patch("MinecraftAgentFramework.agent_manager.read.Minecraft.create", return_value="Minecraft connection")
     def setUp(self, mock_minecraft):
-        self.mock_minecraft = mock_minecraft.return_value
+        self.mock_minecraft_instance = MagicMock()
+        mock_minecraft.return_value = self.mock_minecraft_instance
         self.bot_manager = BotManager()
 
     @patch("framework.agent_manager.InsultBot")
@@ -63,6 +62,7 @@ class TestAgentManager(unittest.TestCase):
             mocked_print.assert_any_call("- bot1")
             mocked_print.assert_any_call("- bot2")
 
+    @patch("MinecraftAgentFramework.agent_manager.read.Minecraft.create", return_value="Minecraft connection")
     @patch("framework.agent_manager.BotManager.read")
     @patch("time.sleep", return_value=None)  # To avoid delays during test
     def test_read_and_response(self, mock_sleep, mock_read):
@@ -80,7 +80,8 @@ class TestAgentManager(unittest.TestCase):
             mock_list.assert_called_once()
             mocked_print.assert_any_call("Saliendo del programa...")
 
-    @patch("framework.agent_manager.mc.events.pollChatPosts")
+    @patch("MinecraftAgentFramework.agent_manager.read.Minecraft.create", return_value="Minecraft connection")
+    @patch("MinecraftAgentFramework.mcpi.minecraft.Minecraft.events.pollChatPosts")
     def test_read(self, mock_pollChatPosts):
         # Simulate no chat messages
         mock_pollChatPosts.return_value = []

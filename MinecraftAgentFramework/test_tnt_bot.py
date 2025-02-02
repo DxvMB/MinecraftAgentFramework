@@ -5,8 +5,8 @@ from agents.tnt_bot import TNTBot
 
 
 class TestTNTBot(unittest.TestCase):
-
-    def setUp(self):
+    @patch("MinecraftAgentFramework.agents.base_agent.Minecraft.create")
+    def setUp(self, mock_create):
         """
         Sets up the environment for testing `TNTBot`.
         A TNTBot instance is created with mocked methods to avoid real interactions with the Minecraft world.

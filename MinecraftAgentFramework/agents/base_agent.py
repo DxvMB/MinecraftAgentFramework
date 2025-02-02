@@ -2,7 +2,6 @@
 from ..mcpi.minecraft import Minecraft
 import threading
 
-mc = Minecraft.create()
 mc_lock = threading.Lock()
 
 
@@ -11,6 +10,7 @@ class MinecraftAgent:
     def __init__(self, name):
         self.name = name
         self.running = True
+        mc = Minecraft.create()
         with mc_lock:
             self.position = mc.player.getTilePos()
 

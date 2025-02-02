@@ -4,8 +4,8 @@ from agents.oracle_bot import OracleBot  # Adjust the import as needed
 
 
 class TestOracleBot(unittest.TestCase):
-
-    def setUp(self):
+    @patch("MinecraftAgentFramework.agents.base_agent.Minecraft.create")
+    def setUp(self, mock_create):
         """
         Sets up the environment for testing `OracleBot`.
         Creates an OracleBot instance with mocked methods to simulate interactions.

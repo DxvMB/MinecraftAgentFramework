@@ -3,13 +3,15 @@ from unittest.mock import MagicMock, patch
 from agents.chat_bot import ChatBotAgent
 
 class TestChatBotAgent(unittest.TestCase):
-    def setUp(self):
+    @patch("MinecraftAgentFramework.agents.base_agent.Minecraft.create")
+    def setUp(self, mock_create):
         self.bot = ChatBotAgent()
         self.bot.mc = MagicMock()  # Mock Minecraft connection
 
+    @patch("MinecraftAgentFramework.agents.base_agent.Minecraft.create")
     @patch("transformers.AutoTokenizer.from_pretrained")
     @patch("transformers.AutoModelForCausalLM.from_pretrained")
-    def test_model_loading(self, mock_model, mock_tokenizer):
+    def test_model_loading(self, mock_model, mock_tokenizer, mock_create):
         bot = ChatBotAgent()
         mock_tokenizer.assert_called_with("facebook/opt-350m")
         mock_model.assert_called_with("facebook/opt-350m")

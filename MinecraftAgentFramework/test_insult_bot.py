@@ -4,8 +4,8 @@ from agents.insult_bot import InsultBot  # Ensure this import is defined properl
 
 
 class TestInsultBot(unittest.TestCase):
-
-    def setUp(self):
+    @patch("MinecraftAgentFramework.agents.base_agent.Minecraft.create")
+    def setUp(self, mock_create):
         """
         Sets up the environment for testing `InsultBot`.
         Here, an instance of `InsultBot` is created with mocks to avoid external dependencies.
