@@ -8,6 +8,9 @@ jobs:
     name: Run tests and collect coverage
     runs-on: ubuntu-latest
     steps:
+      - name: Set PYTHONPATH
+        run: echo "PYTHONPATH=$PYTHONPATH:./MinecraftAgentFramework" >> $GITHUB_ENV
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -18,6 +21,12 @@ jobs:
 
       - name: Install dependencies
         run: pip install pytest pytest-cov
+
+      - name: Install dependencies
+        run: pip install transformers
+
+      - name: Install dependencies
+        run: pip install torch
 
       - name: Run tests
         run: pytest --cov-branch --cov-report=xml
