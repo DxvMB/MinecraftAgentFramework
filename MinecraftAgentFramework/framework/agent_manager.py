@@ -41,7 +41,7 @@ class AgentManager:
         if bot is None:
             return
 
-        bot_thread = threading.Thread(target=bot.run, daemon=True)
+        bot_thread = threading.Thread(target=bot.run, name=bot_type , daemon=True)
         self.threads[bot_type] = {"thread": bot_thread, "bot": bot}
         bot_thread.start()
         print(f"{bot_type} ha sido iniciado.")

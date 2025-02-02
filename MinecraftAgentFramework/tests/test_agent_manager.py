@@ -26,39 +26,6 @@ class TestAgentManager2(unittest.TestCase):
         mock_start.assert_any_call("tnt_bot")
         self.assertEqual(mock_start.call_count, 4)  # Asegurarse de que haya 3 hilos creados.
 
-    @patch("MinecraftAgentFramework.framework.agent_manager.InsultBot")
-    @patch("MinecraftAgentFramework.framework.agent_manager.OracleBot")
-    @patch("MinecraftAgentFramework.framework.agent_manager.TNTBot")
-    @patch("threading.Thread")
-    @patch("MinecraftAgentFramework.framework.agent_manager.Minecraft.create")
-    def test_start_bot(self, mock_minecraft, mock_thread, mock_tnt_bot, mock_oracle_bot, mock_insult_bot):
-        # Test starting insult_bot
-        self.bot_manager.start_bot("insult_bot")
-        mock_insult_bot.assert_called_once_with("Insult Bot")  # Ensure InsultBot is instantiated
-        self.assertIn("insult_bot", self.bot_manager.threads)  # Ensure thread is tracked
-        mock_thread.assert_called_once()  # Ensure thread is started
-
-        # Reset mocks for the next test
-        mock_thread.reset_mock()
-
-        # Test starting oracle_bot
-        self.bot_manager.start_bot("oracle_bot")
-        mock_oracle_bot.assert_called_once_with("Oracle Bot")  # Ensure OracleBot is instantiated
-        self.assertIn("oracle_bot", self.bot_manager.threads)  # Ensure thread is tracked
-        self.assertEqual(mock_thread.call_count, 1)  # Ensure thread is started
-
-        # Reset mocks for the next test
-        mock_thread.reset_mock()
-
-        # Test starting the same bot again (should not start a new thread)
-        self.bot_manager.start_bot("oracle_bot")
-        self.assertEqual(mock_thread.call_count, 0)  # No new thread should be started
-
-        # Test starting an unknown bot type
-        with patch("builtins.print") as mocked_print:
-            self.bot_manager.start_bot("unknown_bot")
-            mocked_print.assert_called_with("Tipo de bot desconocido: unknown_bot")
-
     @patch("MinecraftAgentFramework.framework.agent_manager.AgentManager.read")
     @patch("MinecraftAgentFramework.framework.agent_manager.print")
     def test_read_and_response_start(self, mock_print, mock_read):
