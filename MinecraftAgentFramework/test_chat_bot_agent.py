@@ -1,6 +1,6 @@
 import unittest, time, threading
 from unittest.mock import MagicMock, patch
-from ..agents.chat_bot import ChatBotAgent
+from agents.chat_bot import ChatBotAgent
 
 class TestChatBotAgent(unittest.TestCase):
     def setUp(self):

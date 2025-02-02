@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from ..agents.insult_bot import InsultBot  # Ensure this import is defined properly
+from agents.insult_bot import InsultBot  # Ensure this import is defined properly
 
 
 class TestInsultBot(unittest.TestCase):

@@ -1,8 +1,8 @@
 import unittest
 import sys
-sys.path.append("..")
+sys.path.append("")
 from unittest.mock import MagicMock, patch
-from MinecraftAgentFramework.framework.agent_manager import BotManager
+from framework.agent_manager import BotManager
 
 
 class TestAgentManager(unittest.TestCase):
