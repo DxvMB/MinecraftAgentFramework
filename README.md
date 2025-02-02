@@ -12,6 +12,7 @@ There are three bots currently implemented in the project:
 1. **InsultBot**: Generates random insults in the Minecraft chat.
 2. **OracleBot**: Responds to predictive questions, like a magic 8-ball.
 3. **TNTBot**: Controls explosions within the Minecraft game.
+4. **ChatBot**: Interacts with users in the Minecraft chat, allowing them to control other bots and receive real-time responses.
 
 Each bot runs on a separate thread for smooth concurrent execution.
 ## Usage
