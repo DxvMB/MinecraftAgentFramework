@@ -1,8 +1,10 @@
 import unittest
 import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from unittest.mock import patch, MagicMock
-from ..agents import tnt_bot
-sys.path.append(".")
+from agents.tnt_bot import TNTBot
+
 
 
 class TestTNTBot(unittest.TestCase):
@@ -13,7 +15,7 @@ class TestTNTBot(unittest.TestCase):
         A TNTBot instance is created with mocked methods to avoid real interactions with the Minecraft world.
         """
         self.bot_name = "TNTBot"
-        self.tnt_bot = tnt_bot.TNTBot(name=self.bot_name)
+        self.tnt_bot = TNTBot(name=self.bot_name)
         self.tnt_bot.build = MagicMock()        # Mock the build method to avoid real building
         self.tnt_bot.send_message = MagicMock()  # Mock the send_message method to avoid actual messages
         self.tnt_bot.running = True             # Simulate the bot's running state
