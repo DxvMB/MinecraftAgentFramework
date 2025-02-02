@@ -4,7 +4,7 @@ from MinecraftAgentFramework.agents.insult_bot import InsultBot  # Ensure this i
 
 
 class TestInsultBot(unittest.TestCase):
-    @patch("MinecraftAgentFramework.agents.base_agent.Minecraft.create")
+    @patch("agents.minecraft_agent.Minecraft.create")
     def setUp(self, mock_create):
         """
         Sets up the environment for testing `InsultBot`.
