@@ -14,7 +14,7 @@ class TestChatBotAgent(unittest.TestCase):
         mock_tokenizer.assert_called_with("facebook/opt-350m")
         mock_model.assert_called_with("facebook/opt-350m")
 
-    @patch("MinecraftAgentFramework.agents.chat_bot.ChatBotAgent.query_llm", return_value="Hello there!")
+    @patch("agents.chat_bot.ChatBotAgent.query_llm", return_value="Hello there!")
     def test_query_llm(self, mock_query_llm):
         response = self.bot.query_llm("Hello")
         self.assertEqual(response, "Hello there!")
@@ -30,8 +30,8 @@ class TestChatBotAgent(unittest.TestCase):
         self.bot.send_minecraft_message("Testing message")
         self.bot.mc.postToChat.assert_called_with("Testing message")
 
-    @patch("MinecraftAgentFramework.agents.chat_bot.ChatBotAgent.read_minecraft_chat", return_value=("Hello", 1))
-    @patch("MinecraftAgentFramework.agents.chat_bot.ChatBotAgent.query_llm", return_value="Hi!")
+    @patch("agents.chat_bot.ChatBotAgent.read_minecraft_chat", return_value=("Hello", 1))
+    @patch("agents.chat_bot.ChatBotAgent.query_llm", return_value="Hi!")
     def test_run_once(self, mock_query_llm, mock_read_chat):
         # Ensure the loop runs at least once
         self.bot.running = True

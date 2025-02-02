@@ -2,7 +2,7 @@
 import time
 
 from MinecraftAgentFramework.agents.base_agent import MinecraftAgent
-from ..mcpi import block
+from MinecraftAgentFramework.mcpi import block
 
 
 class OracleBot(MinecraftAgent):
