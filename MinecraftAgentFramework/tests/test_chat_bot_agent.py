@@ -16,10 +16,11 @@ class TestChatBotAgent(unittest.TestCase):
         mock_tokenizer.assert_called_with("facebook/opt-350m")
         mock_model.assert_called_with("facebook/opt-350m")
 
-    @patch("agents.chat_bot.ChatBotAgent.query_llm", return_value="Hello there!")
+    @patch("agents.chat_bot.ChatBotAgent.query_llm", return_value="Hi!")
     def test_query_llm(self, mock_query_llm):
         response = self.bot.query_llm("Hello")
-        self.assertEqual(response, "Hello there!")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "Hi!")
         mock_query_llm.assert_called_with("Hello")
 
     def test_read_minecraft_chat(self):

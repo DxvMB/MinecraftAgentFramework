@@ -18,7 +18,7 @@ class ChatBotAgent:
         print(f"Model {model_name} loaded successfully.")
         print("Connected to Minecraft.")
 
-    def query_llm(self, prompt, max_length=150):
+    def query_llm(self, prompt, max_length=50):
         """
         Generate a response to the input prompt using the model.
         Args:
@@ -46,7 +46,6 @@ class ChatBotAgent:
                 do_sample=True,  # Enable sampling
                 temperature=0.7,  # Slight randomness for variety
                 top_p=0.9  # Use nucleus
-
             )
 
             # Decode the response to readable text

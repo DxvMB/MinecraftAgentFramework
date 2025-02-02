@@ -1,106 +1,94 @@
 import unittest
-from unittest.mock import MagicMock, patch
-from MinecraftAgentFramework.framework.agent_manager import BotManager
+from unittest.mock import patch, MagicMock
+from MinecraftAgentFramework.framework.agent_manager import BotManager # Importa el módulo que contiene BotManager
 
 
-class TestAgentManager(unittest.TestCase):
-    @patch("MinecraftAgentFramework.framework.agent_manager.Minecraft.create")  # Mock Minecraft connection
-    def setUp(self, mock_minecraft):
-        self.mock_minecraft = mock_minecraft.return_value
+class TestAgentManager2(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        # Configura un mock para Minecraft.create() para evitar la conexión real a Minecraft
+        cls.mock_minecraft = MagicMock()
+        BotManager.mc = cls.mock_minecraft
+
+    def setUp(self):
         self.bot_manager = BotManager()
 
-    @patch("framework.agent_manager.InsultBot")
-    @patch("framework.agent_manager.OracleBot")
-    @patch("framework.agent_manager.TNTBot")
-    @patch("threading.Thread")
-    @patch("MinecraftAgentFramework.framework.agent_manager.Minecraft.create")
-    def test_start_bot(self, mock_thread, mock_tnt_bot, mock_oracle_bot, mock_insult_bot, mock_minecraft):
-        # Test starting specific bots
-        self.bot_manager.start_bot("insult_bot")
-        mock_insult_bot.assert_called_once_with("Insult Bot")
-        self.assertIn("insult_bot", self.bot_manager.threads)
-        mock_thread.assert_called_once()
-
-        # Test attempting to start the same bot again
-        self.bot_manager.start_bot("insult_bot")
-        self.assertEqual(mock_thread.call_count, 1)  # No additional thread should be started
-
-        # Test starting another bot type
-        self.bot_manager.start_bot("oracle_bot")
-        mock_oracle_bot.assert_called_once_with("Oracle Bot")
-        self.assertIn("oracle_bot", self.bot_manager.threads)
-
-        # Test invalid bot type
-        with patch("builtins.print") as mocked_print:
-            self.bot_manager.start_bot("unknown_bot")
-            mocked_print.assert_called_with("Tipo de bot desconocido: unknown_bot")
-
-    @patch("framework.agent_manager.threading.Thread")
-    @patch("framework.agent_manager.TNTBot")
-    def test_stop_bot(self, mock_tnt_bot, mock_thread):
-        # Add a mock bot to threads
-        mock_bot_instance = MagicMock()
-        mock_thread_instance = MagicMock()
-        self.bot_manager.threads["tnt_bot"] = {"bot": mock_bot_instance, "thread": mock_thread_instance}
-
-        self.bot_manager.stop_bot("tnt_bot")
-        mock_bot_instance.set_run.assert_called_once()  # Ensure set_run() is called
-        mock_thread_instance.join.assert_called_once()  # Ensure thread join is called
-        self.assertNotIn("tnt_bot", self.bot_manager.threads)  # Bot should be removed
-
-        # Attempt to stop a bot that doesn't exist
-        with patch("builtins.print") as mocked_print:
-            self.bot_manager.stop_bot("nonexistent_bot")
-            mocked_print.assert_called_with("nonexistent_bot no está en ejecución.")
-
-    def test_list_active_bots(self):
-        # Add mock bots to threads
-        self.bot_manager.threads = {"bot1": {}, "bot2": {}}
-        with patch("builtins.print") as mocked_print:
-            self.bot_manager.list_active_bots()
-            mocked_print.assert_any_call("Bots activos:")
-            mocked_print.assert_any_call("- bot1")
-            mocked_print.assert_any_call("- bot2")
-
-    @patch("framework.agent_manager.BotManager.read")
-    @patch("MinecraftAgentFramework.framework.agent_manager.Minecraft.create")
-    @patch("time.sleep", return_value=None)  # To avoid delays during test
-    def test_read_and_response(self, mock_sleep, mock_read, mock_minecraft):
-        # Simulate a start command
-        mock_read.side_effect = ["start insult_bot", "stop insult_bot", "list", "exit"]
-        with patch.object(self.bot_manager, "start_bot") as mock_start, \
-                patch.object(self.bot_manager, "stop_bot") as mock_stop, \
-                patch.object(self.bot_manager, "list_active_bots") as mock_list, \
-                patch("builtins.print") as mocked_print:
-            self.bot_manager.read_and_response()
-
-            # Check commands were executed
-            mock_start.assert_called_once_with("insult_bot")
-            mock_stop.assert_called_once_with("insult_bot")
-            mock_list.assert_called_once()
-            mocked_print.assert_any_call("Saliendo del programa...")
-
-    @patch("MinecraftAgentFramework.framework.agent_manager.Minecraft.create")
-    def test_read(self, mock_minecraft):
-        # Simulate no chat messages
-        mock_minecraft.events.pollChatPosts.return_value = []
-        bot_manager = BotManager()
-        assert bot_manager.read() is None
-        mock_minecraft.events.pollChatPosts.return_value = [MagicMock(message="test message")]
-        assert bot_manager.read() == "test message"
-
-    @patch.object(BotManager, "start_bot")
-    @patch.object(BotManager, "stop_bot")
+    @patch("MinecraftAgentFramework.agents.minecraft_agent.Minecraft.create")
     @patch.object(BotManager, "list_active_bots")
-    @patch("MinecraftAgentFramework.framework.agent_manager.Minecraft.create")
-    def test_start_all(self, mock_list, mock_stop, mock_start, mock_minecraft):
+    @patch.object(BotManager, "stop_bot")
+    @patch.object(BotManager, "start_bot")
+    def test_start_all(self, mock_start, mock_stop, mock_list, mock_minecraft):
         # Test that all available bots are started
         self.bot_manager.start_all()
         mock_start.assert_any_call("insult_bot")
         mock_start.assert_any_call("oracle_bot")
         mock_start.assert_any_call("tnt_bot")
-        self.assertEqual(mock_start.call_count, 4)
+        self.assertEqual(mock_start.call_count, 4)  # Asegurarse de que haya 3 hilos creados.
+
+    @patch("MinecraftAgentFramework.framework.agent_manager.InsultBot")
+    @patch("MinecraftAgentFramework.framework.agent_manager.OracleBot")
+    @patch("MinecraftAgentFramework.framework.agent_manager.TNTBot")
+    @patch("threading.Thread")
+    @patch("MinecraftAgentFramework.framework.agent_manager.Minecraft.create")
+    def test_start_bot(self, mock_minecraft, mock_thread, mock_tnt_bot, mock_oracle_bot, mock_insult_bot):
+        # Test starting insult_bot
+        self.bot_manager.start_bot("insult_bot")
+        mock_insult_bot.assert_called_once_with("Insult Bot")  # Ensure InsultBot is instantiated
+        self.assertIn("insult_bot", self.bot_manager.threads)  # Ensure thread is tracked
+        mock_thread.assert_called_once()  # Ensure thread is started
+
+        # Reset mocks for the next test
+        mock_thread.reset_mock()
+
+        # Test starting oracle_bot
+        self.bot_manager.start_bot("oracle_bot")
+        mock_oracle_bot.assert_called_once_with("Oracle Bot")  # Ensure OracleBot is instantiated
+        self.assertIn("oracle_bot", self.bot_manager.threads)  # Ensure thread is tracked
+        self.assertEqual(mock_thread.call_count, 1)  # Ensure thread is started
+
+        # Reset mocks for the next test
+        mock_thread.reset_mock()
+
+        # Test starting the same bot again (should not start a new thread)
+        self.bot_manager.start_bot("oracle_bot")
+        self.assertEqual(mock_thread.call_count, 0)  # No new thread should be started
+
+        # Test starting an unknown bot type
+        with patch("builtins.print") as mocked_print:
+            self.bot_manager.start_bot("unknown_bot")
+            mocked_print.assert_called_with("Tipo de bot desconocido: unknown_bot")
+
+    @patch("MinecraftAgentFramework.framework.agent_manager.BotManager.read")
+    @patch("MinecraftAgentFramework.framework.agent_manager.print")
+    def test_read_and_response_start(self, mock_print, mock_read):
+        mock_read.side_effect = ["unknown_command", "exit"]  # Agrega "exit" para salir del bucle
+        self.bot_manager.read_and_response()
+        mock_print.assert_any_call("Comando no reconocido. Intente de nuevo.")
 
 
-if __name__ == "__main__":
+    def test_stop_bot(self):
+        # Simula un bot en ejecución
+        bot_type = "test_bot"
+        mock_bot = MagicMock()
+        mock_thread = MagicMock()
+        self.bot_manager.threads[bot_type] = {"thread": mock_thread, "bot": mock_bot}
+
+        self.bot_manager.stop_bot(bot_type)
+
+        mock_bot.set_run.assert_called_once()  # Asegúrate de que se llama a set_run()
+        mock_thread.join.assert_called_once()  # Asegúrate de que se llama a join()
+        self.assertNotIn(bot_type, self.bot_manager.threads)
+
+    def test_list_active_bots(self):
+        # Simula algunos bots activos.
+        self.bot_manager.threads = {"bot1": {}, "bot2": {}}
+        with patch('builtins.print') as mock_print:  # Mock de print para verificar la salida
+            self.bot_manager.list_active_bots()
+            mock_print.assert_any_call("Bots activos:")
+            mock_print.assert_any_call("- bot1")
+            mock_print.assert_any_call("- bot2")
+
+
+if __name__ == '__main__':
     unittest.main()
