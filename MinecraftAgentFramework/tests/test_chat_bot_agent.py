@@ -1,6 +1,6 @@
 import unittest, time, threading
 from unittest.mock import MagicMock, patch
-from agents.chat_bot import ChatBotAgent
+from MinecraftAgentFramework.agents.chat_bot import ChatBotAgent
 
 class TestChatBotAgent(unittest.TestCase):
     @patch("MinecraftAgentFramework.agents.base_agent.Minecraft.create")

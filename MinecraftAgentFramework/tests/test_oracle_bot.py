@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from agents.oracle_bot import OracleBot  # Adjust the import as needed
+from MinecraftAgentFramework.agents.oracle_bot import OracleBot  # Adjust the import as needed
 
 
 class TestOracleBot(unittest.TestCase):

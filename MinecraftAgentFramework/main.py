@@ -4,7 +4,7 @@ from http.client import responses
 from MinecraftAgentFramework.agents.insult_bot import InsultBot
 from MinecraftAgentFramework.agents.tnt_bot import TNTBot
 from MinecraftAgentFramework.agents.oracle_bot import OracleBot
-from MinecraftAgentFramework.framework.bot_manager import BotManager
+from MinecraftAgentFramework.framework.agent_manager import BotManager
 import time
 
 
