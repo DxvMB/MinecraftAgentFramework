@@ -1,6 +1,5 @@
 # MinecraftAgentFramework
-[![Python application](https://github.com/kamikazeDulcecito/MinecraftAgentFramework/actions/workflows/python-app.yml/badge.svg)](https://github.com/kamikazeDulcecito/MinecraftAgentFramework/actions/workflows/python-app.yml)
-[![codecov](https://codecov.io/gh/kamikazeDulcecito/MinecraftAgentFramework/graph/badge.svg?token=8IW6T0H8WE)](https://codecov.io/gh/kamikazeDulcecito/MinecraftAgentFramework)
+[![Run tests and upload coverage](https://github.com/kamikazeDulcecito/MinecraftAgentFramework/actions/workflows/python-app.yml/badge.svg)](https://github.com/kamikazeDulcecito/MinecraftAgentFramework/actions/workflows/python-app.yml)
 
 This project provides a system to manage and interact with various bots in a Minecraft environment using Python. The bots can perform a variety of tasks, such as providing predictive responses, generating in-game effects, and more.
 ## Features
