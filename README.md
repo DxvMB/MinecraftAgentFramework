@@ -17,11 +17,11 @@ There are three bots currently implemented in the project:
 Each bot runs on a separate thread for smooth concurrent execution.
 ## Usage
 ### Running the Bot Manager
-1. Import and initialize the `BotManager` class in your main Python script or interactive console:
+1. Import and initialize the `AgentManager` class in your main Python script or interactive console:
 
-    from agent_manager import BotManager
+    from agent_manager import AgentManager
 
-    manager = BotManager()
+    manager = AgentManager()
 1. Use the following operations to control the bots:
     - **Start all bots**:
       manager.start_all()
@@ -41,8 +41,8 @@ Example: `start insult_bot`
   exit
 If an invalid bot type or command is sent, you will receive an appropriate message.
 ## Architecture Overview
-### Main Class: `BotManager`
-**`BotManager`** is the core of the project, responsible for managing the lifecycle of the bots. Below are its main components:
+### Main Class: `AgentManager`
+**`AgentManager`** is the core of the project, responsible for managing the lifecycle of the bots. Below are its main components:
 #### Attributes:
 - `threads`: A dictionary that stores information about currently active bots and their corresponding threads.
 
@@ -71,10 +71,10 @@ Each bot is implemented as part of the `MinecraftAgentFramework` module. Below i
 - **Trigger**: Runs automatically when started and continuously monitors for TNT-related events.
 ## Example Script
 Here’s an example script to demonstrate how to manage bots programmatically:
-from agent_manager import BotManager
+from agent_manager import AgentManager
 
-# Create an instance of BotManager
-manager = BotManager()
+# Create an instance of AgentManager
+manager = AgentManager()
 
 # Start specific bots
 manager.start_bot("insult_bot")
@@ -93,7 +93,7 @@ manager.read_and_response()
 You can add additional bots by:
 1. Creating a new bot class in the `MinecraftAgentFramework.agents` module.
 2. Defining the logic for the new bot’s behavior (using methods such as `run()` and `set_run()`).
-3. Updating the `BotManager` class to include the new bot type in its methods (`start_all`, `start_bot`, etc.).
+3. Updating the `AgentManager` class to include the new bot type in its methods (`start_all`, `start_bot`, etc.).
 ## Dependencies
 This project depends on the following Python packages:
 - `MinecraftAgentFramework`: For bot integration with Minecraft.

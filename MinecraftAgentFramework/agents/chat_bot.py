@@ -6,7 +6,7 @@ import time
 import torch
 
 
-class ChatBotAgent:
+class ChatBot:
     def __init__(self, model_name="facebook/opt-350m"):
         """
         Initialize the chatbot with the Facebook OPT model for conversational interaction.
@@ -105,7 +105,7 @@ class ChatBotAgent:
             Main loop for managing chatbot responses in Minecraft chat.
             Reads messages from Minecraft, processes them with the model, and responds back.
             """
-        print("ChatBotAgent is running...")
+        print("Chat_bot is running...")
         while self.running:
             try:
                 # Read messages from Minecraft chat
@@ -135,7 +135,7 @@ class ChatBotAgent:
                 time.sleep(1)
 
             except KeyboardInterrupt:
-                print("Exiting ChatBotAgent...")
+                print("Exiting Chat_bot...")
                 self.running = False  # Stop the loop on manual interruption
             except Exception as e:
                 print(f"An error occurred: {e}")

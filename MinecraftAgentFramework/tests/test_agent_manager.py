@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from MinecraftAgentFramework.framework.agent_manager import BotManager # Importa el módulo que contiene BotManager
+from MinecraftAgentFramework.framework.agent_manager import AgentManager # Importa el módulo que contiene AgentManager
 
 
 class TestAgentManager2(unittest.TestCase):
@@ -9,15 +9,15 @@ class TestAgentManager2(unittest.TestCase):
     def setUpClass(cls):
         # Configura un mock para Minecraft.create() para evitar la conexión real a Minecraft
         cls.mock_minecraft = MagicMock()
-        BotManager.mc = cls.mock_minecraft
+        AgentManager.mc = cls.mock_minecraft
 
     def setUp(self):
-        self.bot_manager = BotManager()
+        self.bot_manager = AgentManager()
 
     @patch("MinecraftAgentFramework.agents.minecraft_agent.Minecraft.create")
-    @patch.object(BotManager, "list_active_bots")
-    @patch.object(BotManager, "stop_bot")
-    @patch.object(BotManager, "start_bot")
+    @patch.object(AgentManager, "list_active_bots")
+    @patch.object(AgentManager, "stop_bot")
+    @patch.object(AgentManager, "start_bot")
     def test_start_all(self, mock_start, mock_stop, mock_list, mock_minecraft):
         # Test that all available bots are started
         self.bot_manager.start_all()
@@ -59,7 +59,7 @@ class TestAgentManager2(unittest.TestCase):
             self.bot_manager.start_bot("unknown_bot")
             mocked_print.assert_called_with("Tipo de bot desconocido: unknown_bot")
 
-    @patch("MinecraftAgentFramework.framework.agent_manager.BotManager.read")
+    @patch("MinecraftAgentFramework.framework.agent_manager.AgentManager.read")
     @patch("MinecraftAgentFramework.framework.agent_manager.print")
     def test_read_and_response_start(self, mock_print, mock_read):
         mock_read.side_effect = ["unknown_command", "exit"]  # Agrega "exit" para salir del bucle
