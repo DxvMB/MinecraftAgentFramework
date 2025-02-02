@@ -48,32 +48,32 @@ class AgentManager:
 
     def _create_bot(self, bot_type):
         try:
-            # Mapeo de bot_type a la clase correspondiente
+            # map correct bot_type
             bot_type_to_class = {
                 "insult_bot": "InsultBot",
                 "oracle_bot": "OracleBot",
                 "tnt_bot": "TNTBot",
-                "chat_bot": "ChatBot"  # Asegúrate de que el nombre de la clase sea correcto
+                "chat_bot": "ChatBot"  # check correct bot name
             }
 
-            # Verificamos que bot_type esté en el diccionario
+            # check correct bot type
             if bot_type not in bot_type_to_class:
                 print(f"Tipo de bot desconocido: {bot_type}")
                 return None
 
-            # Obtenemos el nombre de la clase del diccionario
+            # get name
             bot_class_name = bot_type_to_class[bot_type]
 
-            # Importamos el módulo correspondiente
+            # import correspoing modeule
             module = importlib.import_module(f"MinecraftAgentFramework.agents.{bot_type}")
             bot_class = getattr(module, bot_class_name)
 
-            # Inicializamos el bot con el nombre correcto del modelo
+            # initialize bot type
             if bot_type == "chat_bot":
-                # Usamos un modelo válido de Hugging Face, por ejemplo, "facebook/opt-350m"
+                # valid name for Hugging Face, eg, "facebook/opt-350m"
                 return bot_class("facebook/opt-350m")
             else:
-                # Proporcionamos un nombre durante inicialización para otros bots
+                # give names
                 return bot_class(bot_class_name.replace('Bot', ''))
         except (ImportError, AttributeError) as e:
             print(f"Error al crear bot {bot_type}: {e}")
