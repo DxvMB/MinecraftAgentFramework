@@ -28,9 +28,6 @@ jobs:
       - name: Install dependencies
         run: pip install torch
 
-      - name: Install dependencies
-        run: pip install importlib
-
       - name: Run tests
         run: pytest --cov-branch --cov-report=xml
 
