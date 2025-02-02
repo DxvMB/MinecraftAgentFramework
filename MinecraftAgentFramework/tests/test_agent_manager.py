@@ -4,7 +4,7 @@ from MinecraftAgentFramework.framework.agent_manager import BotManager
 
 
 class TestAgentManager(unittest.TestCase):
-    @patch("MinecraftAgentFramework.agents.base_agent.Minecraft.create")  # Mock Minecraft connection
+    @patch("MinecraftAgentFramework.framework.agent_manager.Minecraft.create")  # Mock Minecraft connection
     def setUp(self, mock_minecraft):
         self.mock_minecraft = mock_minecraft.return_value
         self.bot_manager = BotManager()
@@ -13,7 +13,7 @@ class TestAgentManager(unittest.TestCase):
     @patch("framework.agent_manager.OracleBot")
     @patch("framework.agent_manager.TNTBot")
     @patch("threading.Thread")
-    @patch("MinecraftAgentFramework.agents.base_agent.Minecraft.create")
+    @patch("MinecraftAgentFramework.framework.agent_manager.Minecraft.create")
     def test_start_bot(self, mock_thread, mock_tnt_bot, mock_oracle_bot, mock_insult_bot, mock_minecraft):
         # Test starting specific bots
         self.bot_manager.start_bot("insult_bot")
@@ -63,7 +63,7 @@ class TestAgentManager(unittest.TestCase):
             mocked_print.assert_any_call("- bot2")
 
     @patch("framework.agent_manager.BotManager.read")
-    @patch("MinecraftAgentFramework.agents.MinecraftAgent.Minecraft.create")
+    @patch("MinecraftAgentFramework.framework.agent_manager.Minecraft.create")
     @patch("time.sleep", return_value=None)  # To avoid delays during test
     def test_read_and_response(self, mock_sleep, mock_read, mock_minecraft):
         # Simulate a start command
@@ -80,21 +80,19 @@ class TestAgentManager(unittest.TestCase):
             mock_list.assert_called_once()
             mocked_print.assert_any_call("Saliendo del programa...")
 
-    @patch("framework.agent_manager.mc.events.pollChatPosts")
-    @patch("MinecraftAgentFramework.agents.MinecraftAgent.Minecraft.create")
-    def test_read(self, mock_pollChatPosts, mock_minecraft):
+    @patch("MinecraftAgentFramework.framework.agent_manager.Minecraft.create")
+    def test_read(self, mock_minecraft):
         # Simulate no chat messages
-        mock_pollChatPosts.return_value = []
-        self.assertIsNone(self.bot_manager.read())
-
-        # Simulate chat messages
-        mock_pollChatPosts.return_value = [MagicMock(message="test message")]
-        self.assertEqual(self.bot_manager.read(), "test message")
+        mock_minecraft.events.pollChatPosts.return_value = []
+        bot_manager = BotManager()
+        assert bot_manager.read() is None
+        mock_minecraft.events.pollChatPosts.return_value = [MagicMock(message="test message")]
+        assert bot_manager.read() == "test message"
 
     @patch.object(BotManager, "start_bot")
     @patch.object(BotManager, "stop_bot")
     @patch.object(BotManager, "list_active_bots")
-    @patch("MinecraftAgentFramework.agents.base_agent.Minecraft.create")
+    @patch("MinecraftAgentFramework.framework.agent_manager.Minecraft.create")
     def test_start_all(self, mock_list, mock_stop, mock_start, mock_minecraft):
         # Test that all available bots are started
         self.bot_manager.start_all()

@@ -8,11 +8,18 @@ from MinecraftAgentFramework.agents.chat_bot import ChatBotAgent
 from MinecraftAgentFramework.mcpi.minecraft import Minecraft
 
 
-
 class BotManager:
+    mc = None
+
+    @classmethod
+    def initialize_minecraft(cls):
+        if cls.mc is None:
+            cls.mc = Minecraft.create()
+
     def __init__(self):
+        BotManager.initialize_minecraft()
         self.threads = {}
-        self.mc = Minecraft.create()
+
 
     def start_all(self):
         """
@@ -65,9 +72,9 @@ class BotManager:
         print("Bots activos:")
         for bot_type in self.threads.keys():
             print(f"- {bot_type}")
-
-    def read(self):
-        chat_posts = self.mc.events.pollChatPosts()
+    @staticmethod
+    def read():
+        chat_posts = BotManager.mc.events.pollChatPosts()
         if chat_posts:  # Si existen mensajes en el chat
             message = chat_posts[0].message  # Recuperar el mensaje del primer evento
             return message

@@ -1,4 +1,4 @@
-import minecraft_agent
+from MinecraftAgentFramework.agents.minecraft_agent import MinecraftAgent
 import random
 import time
 

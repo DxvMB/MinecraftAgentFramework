@@ -4,7 +4,7 @@ from MinecraftAgentFramework.agents.tnt_bot import TNTBot
 
 
 class TestTNTBot(unittest.TestCase):
-    @patch("agents.minecraft_agent.Minecraft.create")
+    @patch("MinecraftAgentFramework.agents.minecraft_agent.Minecraft.create")
     def setUp(self, mock_create):
         """
         Sets up the environment for testing `TNTBot`.

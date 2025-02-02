@@ -1,7 +1,7 @@
 # agents/oracle_bot.py
 import time
 
-import minecraft_agent
+from MinecraftAgentFramework.agents.minecraft_agent import MinecraftAgent
 from MinecraftAgentFramework.mcpi import block
 
 
